@@ -23,7 +23,7 @@ MaxHR = st.slider("Max Heart Rate", 60, 220, 150)
 Oldpeak = st.slider("Oldpeak", 0.0, 5.0, 1.0)
 
 Sex = st.selectbox("Sex", ["M", "F"])
-ChestPainType = st.selectbox("Chest Pain Type", ["ATA", "NAP", "TA", "ASY"])
+ChestPainType = st.selectbox("Chest Pain Type", ["Atypical Angina", "Non-Anginal Pain", "Typical Angina", "Asymptomatic"])
 RestingECG = st.selectbox("Resting ECG", ["Normal", "ST", "LVH"])
 ExerciseAngina = st.selectbox("Exercise Angina", ["Y", "N"])
 ST_Slope = st.selectbox("ST Slope", ["Up", "Flat", "Down"])
