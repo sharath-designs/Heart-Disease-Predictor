@@ -3,30 +3,18 @@ import joblib
 import numpy as np
 import pandas as pd
 
-# -------------------------------
-# Load files
-# -------------------------------
+
 model = joblib.load('KNN.heart.pkl')
 scaler = joblib.load('scaler.pkl')
 columns = joblib.load('columns.pkl')
 
-# -------------------------------
-# Page Config
-# -------------------------------
+
 st.set_page_config(page_title="Heart Disease Prediction", page_icon="❤️")
 
 st.title("❤️ Heart Disease Prediction App")
 st.write("Enter patient details below:")
 
-# -------------------------------
-# Reset Button
-# -------------------------------
-# if st.button("🔄 Reset"):
-#     st.experimental_rerun()
 
-# -------------------------------
-# Inputs
-# -------------------------------
 Age = st.slider("Age", 1, 100, 25)
 RestingBP = st.slider("Resting Blood Pressure", 80, 200, 120)
 Cholesterol = st.slider("Cholesterol", 100, 400, 200)
@@ -40,9 +28,7 @@ RestingECG = st.selectbox("Resting ECG", ["Normal", "ST", "LVH"])
 ExerciseAngina = st.selectbox("Exercise Angina", ["Y", "N"])
 ST_Slope = st.selectbox("ST Slope", ["Up", "Flat", "Down"])
 
-# -------------------------------
-# Input Summary
-# -------------------------------
+
 st.subheader("📋 Input Summary")
 
 input_dict = {
@@ -61,9 +47,7 @@ input_dict = {
 
 st.write(pd.DataFrame([input_dict]))
 
-# -------------------------------
-# Encoding
-# -------------------------------
+
 Sex_M = 1 if Sex == "M" else 0
 
 ChestPainType_ATA = 1 if ChestPainType == "ATA" else 0
@@ -78,9 +62,7 @@ ExerciseAngina_Y = 1 if ExerciseAngina == "Y" else 0
 ST_Slope_Flat = 1 if ST_Slope == "Flat" else 0
 ST_Slope_Up = 1 if ST_Slope == "Up" else 0
 
-# -------------------------------
-# Arrange Input
-# -------------------------------
+
 input_data = [
     Age, RestingBP, Cholesterol, FastingBS, MaxHR, Oldpeak,
     Sex_M,
@@ -92,9 +74,7 @@ input_data = [
 
 input_array = np.array([input_data])
 
-# -------------------------------
-# Prediction
-# -------------------------------
+
 if st.button("🔍 Predict"):
 
     input_scaled = scaler.transform(input_array)
@@ -102,9 +82,7 @@ if st.button("🔍 Predict"):
     prediction = model.predict(input_scaled)
     probability = model.predict_proba(input_scaled)
 
-    # -------------------------------
-    # Output
-    # -------------------------------
+    
     st.subheader("🧠 Prediction Result")
 
     if prediction[0] == 1:
@@ -114,9 +92,6 @@ if st.button("🔍 Predict"):
 
     st.write(f"📊 Confidence: {round(np.max(probability)*100, 2)}%")
 
-    # -------------------------------
-    # Basic Data Insights
-    # -------------------------------
     st.subheader("📈 Basic Insights")
 
     if Age > 50:
@@ -131,9 +106,7 @@ if st.button("🔍 Predict"):
     if MaxHR < 100:
         st.warning("Low max heart rate")
 
-    # -------------------------------
-    # Feature Importance (Explanation)
-    # -------------------------------
+
     st.subheader("🔎 Model Insight")
 
     st.info(
