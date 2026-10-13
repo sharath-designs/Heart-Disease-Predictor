@@ -11,7 +11,7 @@ columns = joblib.load('columns.pkl')
 
 st.set_page_config(page_title="Heart Disease Prediction", page_icon="❤️")
 
-st.title("❤️ Heart Disease Prediction App")
+st.title("Heart Disease Prediction App")
 st.write("Enter patient details below:")
 
 
@@ -29,7 +29,7 @@ ExerciseAngina = st.selectbox("Exercise Angina", ["Y", "N"])
 ST_Slope = st.selectbox("ST Slope", ["Up", "Flat", "Down"])
 
 
-st.subheader("📋 Input Summary")
+st.subheader("Input Summary")
 
 input_dict = {
     "Age": Age,
@@ -83,16 +83,16 @@ if st.button("🔍 Predict"):
     probability = model.predict_proba(input_scaled)
 
     
-    st.subheader("🧠 Prediction Result")
+    st.subheader("Prediction Result")
 
     if prediction[0] == 1:
-        st.error("⚠️ High Risk of Heart Disease")
+        st.error(" High Risk of Heart Disease")
     else:
-        st.success("✅ Low Risk of Heart Disease")
+        st.success("Low Risk of Heart Disease")
 
-    st.write(f"📊 Confidence: {round(np.max(probability)*100, 2)}%")
+    st.write(f"Confidence: {round(np.max(probability)*100, 2)}%")
 
-    st.subheader("📈 Basic Insights")
+    st.subheader("Basic Insights")
 
     if Age > 50:
         st.warning("Age above 50 may increase risk")
@@ -107,7 +107,7 @@ if st.button("🔍 Predict"):
         st.warning("Low max heart rate")
 
 
-    st.subheader("🔎 Model Insight")
+    st.subheader(" Model Insight")
 
     st.info(
         "KNN model does not provide direct feature importance. "
